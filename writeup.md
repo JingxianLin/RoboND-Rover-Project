@@ -42,16 +42,16 @@ The functions are tested on both the provided data and the collected data (under
 
 ![alt text][image1]
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result.
-In the `process_image()` function, perspective transform is applied on the input image through the defined source and destination points, then the `color_thresh()` and `search_rocks()` functions are used to identify navigable terrain/obstacles/rock samples.  And use the moviepy library to create a video based on the collected data (my_mapping.mp4 under output).
+In the `process_image()` function, perspective transform is applied on the input image through the defined source and destination points, then the `color_thresh()` and `search_rocks()` functions are used to identify navigable terrain/obstacles/rock samples, example shown below.  The worldmap is updated to include the original image in the upper left hand corner, the warped image in the upper right hand corner, and the worldmap is overlayed with the ground truth map.  Then use the moviepy library to create a video based on the collected data (my_mapping.mp4 under output).
 
 ![alt text][image2]
 ### Autonomous Navigation and Mapping
 
 #### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
-
+In the `perception_step()` function, the pre-defined functions are applied in succession and the Rover state is updated accordingly: On left side of screen, Rover.vision_image is embeded using color-thresholded binary images for navigable terrain, obstacles and rock samples; on right side of screen, Rover.worldmap is equipped with the detected information.
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
+Simulator is set with 1024 x 768 resolution and good graphics quality.  After launching in autonomous mode, the rover finds rock samples pretty soon.  To improve this project, the `decision_step()` function should be modified to include the procedure to bring collected samples to the target.
